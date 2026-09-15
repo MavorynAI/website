@@ -3,9 +3,10 @@ import './App.css'
 
 const Arrow = () => <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4" /></svg>
 const Check = () => <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 10 3 3 7-7" /></svg>
+const logoUrl = `${import.meta.env.BASE_URL}mavoryn-mark.png`
 
 function Logo({ compact = false }: { compact?: boolean }) {
-  return <span className={`logo ${compact ? 'compact' : ''}`}><img src="/mavoryn-mark.png" alt="" /><span>Mavoryn<span className="wordmark-a">A</span><span className="wordmark-i">I</span></span></span>
+  return <span className={`logo ${compact ? 'compact' : ''}`}><img src={logoUrl} alt="" /><span>Mavoryn<span className="wordmark-a">A</span><span className="wordmark-i">I</span></span></span>
 }
 
 function App() {
@@ -50,7 +51,7 @@ function App() {
 
     <section className="mission section wrap" id="mission"><div className="section-tag reveal">04 / The mission</div><div className="mission-copy reveal"><span>Better health supports better care.</span><h2>Care for others<br />without losing <em>yourself.</em></h2><p>We’re starting in Arizona and building toward a future where recovery and mental fitness are treated as part of healthcare excellence—from the first exam to a lifetime in practice.</p></div><div className="arizona reveal"><div className="az-mark">AZ</div><div><span>Starting local</span><strong>Arizona’s healthcare community</strong><p>Students · Residents · Fellows · Doctors · Nurses · Pharmacists · PAs · Therapists · Healthcare teams</p></div></div></section>
 
-    <section className="beta section" id="beta"><div className="wrap beta-inner reveal"><img src="/mavoryn-mark.png" alt="MavorynAI logo" /><div className="kicker">Private beta · Arizona</div><h2>A healthier way<br />through healthcare.</h2><p>Join the first group shaping MavorynAI.</p><form onSubmit={e => e.preventDefault()}><label className="sr-only" htmlFor="email">Email address</label><input id="email" type="email" placeholder="Your email address" required/><button className="pill primary" type="submit">Request access <Arrow /></button></form><small>For healthcare students, trainees, clinicians, and professionals. No spam. Ever.</small></div></section>
+    <section className="beta section" id="beta"><div className="wrap beta-inner reveal"><img src={logoUrl} alt="MavorynAI logo" /><div className="kicker">Private beta · Arizona</div><h2>A healthier way<br />through healthcare.</h2><p>Join the first group shaping MavorynAI.</p><form onSubmit={e => e.preventDefault()}><label className="sr-only" htmlFor="email">Email address</label><input id="email" type="email" placeholder="Your email address" required/><button className="pill primary" type="submit">Request access <Arrow /></button></form><small>For healthcare students, trainees, clinicians, and professionals. No spam. Ever.</small></div></section>
     <footer className="footer wrap"><Logo compact/><div><a href="#privacy">Privacy</a><a href="#home">Terms</a><a href="mailto:hello@mavorynai.com">Contact</a></div><span>© 2026 MavorynAI · A general wellness product, not a medical device.</span></footer>
   </main>
 }
