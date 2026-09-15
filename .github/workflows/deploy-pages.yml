@@ -39,8 +39,6 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build production website
-        env:
-          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
         run: yarn build
 
       - name: Upload GitHub Pages artifact
