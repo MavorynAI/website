@@ -1,0 +1,280 @@
+/* ================================ Beta =================================== */
+
+.beta {
+  position: relative;
+  overflow: clip;
+  border-top: 1px solid var(--line);
+  background:
+    radial-gradient(120% 80% at 50% 0%, var(--blue-a08), transparent 60%),
+    linear-gradient(160deg, var(--surface), var(--bg));
+}
+
+.beta__glow--1 {
+  width: 520px;
+  height: 520px;
+  left: 50%;
+  top: -12%;
+  translate: -50% 0;
+  background: var(--mint-a14);
+  animation-duration: 28s;
+}
+
+.beta__glow--2 {
+  width: 380px;
+  height: 380px;
+  right: 8%;
+  bottom: 0;
+  background: var(--blue-a14);
+  animation-duration: 34s;
+  animation-direction: alternate-reverse;
+}
+
+.beta__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.beta__mark img {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  animation: beta-float 6s var(--ease-in-out) infinite alternate;
+}
+
+.beta__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-7);
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--surface-raised);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--mint);
+}
+
+.beta__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: beta-blink 2.2s var(--ease-in-out) infinite;
+}
+
+.beta__title {
+  margin: var(--space-6) 0 var(--space-4);
+}
+
+.beta__lede {
+  color: var(--muted);
+  font-size: var(--text-lg);
+}
+
+/* --- Form ---------------------------------------------------------------- */
+
+.beta__form-wrap {
+  width: min(520px, 100%);
+  margin-top: var(--space-8);
+  min-height: 62px;
+  display: grid;
+  place-items: center;
+}
+
+.beta__form {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: 6px;
+  border-radius: var(--r-full);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--ring-top);
+  transition:
+    border-color var(--dur-3) var(--ease-out),
+    box-shadow var(--dur-4) var(--ease-out);
+}
+
+/* Lift the whole field when the input inside it is focused, so the affordance
+   belongs to the control rather than to the bare input. */
+.beta__form:focus-within {
+  border-color: var(--mint-a40);
+  box-shadow: var(--ring-top), 0 0 0 4px var(--mint-a14);
+}
+
+.beta__form input {
+  flex: 1;
+  min-width: 0;
+  align-self: stretch;
+  background: transparent;
+  border: 0;
+  outline: none;
+  padding: 0 var(--space-5);
+  /* Larger than the surrounding UI text: this is the one field on the page,
+     and a 12px email field reads as an afterthought. */
+  font-size: var(--text-md);
+  color: var(--ink);
+}
+
+.beta__form input::placeholder {
+  color: var(--muted-2);
+}
+
+/* The field's own focus ring is redundant next to :focus-within above. */
+.beta__form input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.beta__submit {
+  flex: none;
+}
+
+.spinner {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  border-top-color: transparent;
+  animation: spin 720ms linear infinite;
+}
+
+.beta__success {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 15px var(--space-6);
+  border-radius: var(--r-full);
+  border: 1px solid var(--mint-a40);
+  background: var(--mint-a08);
+  color: var(--ink);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  animation: success-in var(--dur-5) var(--ease-spring);
+}
+
+.beta__success-icon {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--grad-brand);
+  color: #04121a;
+  flex: none;
+}
+
+.beta__success-icon .icon-check {
+  width: 13px;
+  height: 13px;
+  stroke-width: 2.4;
+}
+
+.beta__note {
+  margin-top: var(--space-4);
+  color: var(--muted-2);
+  font-size: var(--text-xs);
+}
+
+/* ============================== Keyframes ================================ */
+
+@keyframes beta-float {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 0 -10px;
+  }
+}
+
+@keyframes beta-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes success-in {
+  from {
+    opacity: 0;
+    scale: 0.94;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+/* ============================== Responsive =============================== */
+
+@media (max-width: 560px) {
+  .beta__form {
+    flex-direction: column;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+    gap: var(--space-3);
+  }
+
+  .beta__form:focus-within {
+    box-shadow: none;
+  }
+
+  .beta__form input {
+    /* The base rule sets `flex: 1` for the desktop row. Once the form stacks,
+       that flex-basis governs the main axis and would collapse the field to
+       its line box, so the growth is switched off before setting a height. */
+    flex: none;
+    width: 100%;
+    height: 56px;
+    padding-inline: var(--space-6);
+    /* 16px is the threshold below which iOS Safari zooms the page on focus. */
+    font-size: 16px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-full);
+  }
+
+  .beta__form input:focus-visible {
+    border-color: var(--mint-a40);
+    box-shadow: 0 0 0 4px var(--mint-a14);
+  }
+
+  .beta__submit {
+    flex: none;
+    width: 100%;
+    min-height: 54px;
+    font-size: var(--text-base);
+  }
+
+  .beta__mark img {
+    width: 84px;
+    height: 84px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .beta__mark img,
+  .beta__dot,
+  .beta__success {
+    animation: none;
+  }
+}

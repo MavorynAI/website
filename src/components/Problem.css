@@ -1,0 +1,112 @@
+/* ============================== 01 Problem =============================== */
+
+.problem__grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(40px, 7vw, 100px);
+  align-items: end;
+  margin-top: var(--space-7);
+}
+
+.problem__title {
+  max-width: 14ch;
+}
+
+.problem__copy p {
+  max-width: 46ch;
+}
+
+.problem__accent {
+  color: var(--mint);
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+  margin-top: var(--space-6);
+  padding-left: var(--space-5);
+  position: relative;
+}
+
+/* Accent rule that draws itself downward as the paragraph reveals. */
+.problem__accent::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--grad-brand);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform var(--dur-7) var(--ease-emphasis) 320ms;
+}
+
+.problem__copy.is-revealed .problem__accent::before {
+  transform: scaleY(1);
+}
+
+/* --- Stat cards ---------------------------------------------------------- */
+
+.problem__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin-top: clamp(56px, 8vw, 96px);
+}
+
+.stat-card {
+  height: 100%;
+}
+
+.stat-card .surface-card__body {
+  padding: var(--space-8) var(--space-7) var(--space-7);
+  display: flex;
+  flex-direction: column;
+  min-height: 210px;
+}
+
+.stat-card__index {
+  color: var(--mint);
+  opacity: 0.7;
+}
+
+.stat-card__value {
+  display: block;
+  font-size: var(--text-4xl);
+  line-height: 1.1;
+  letter-spacing: -0.055em;
+  font-weight: 500;
+  margin-top: auto;
+}
+
+.stat-card__detail {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--muted);
+  max-width: 24ch;
+  margin-top: var(--space-3);
+  line-height: var(--leading-normal);
+}
+
+@media (max-width: 900px) {
+  .problem__grid {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .problem__title {
+    max-width: none;
+  }
+
+  .problem__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card .surface-card__body {
+    min-height: 0;
+    padding: var(--space-7);
+  }
+
+  .stat-card__value {
+    margin-top: var(--space-6);
+  }
+}

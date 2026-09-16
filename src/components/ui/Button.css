@@ -1,0 +1,200 @@
+/* ============================ Button system ============================== */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border-radius: var(--r-full);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  isolation: isolate;
+  overflow: hidden;
+  cursor: pointer;
+  /* translate: magnetic pull · scale: press feedback */
+  transform: translate3d(var(--mx, 0), var(--my, 0), 0) scale(var(--press, 1));
+  transition:
+    transform var(--dur-4) var(--ease-spring),
+    box-shadow var(--dur-3) var(--ease-out),
+    background var(--dur-3) var(--ease-out),
+    border-color var(--dur-3) var(--ease-out),
+    color var(--dur-3) var(--ease-out);
+}
+
+.btn:not(.btn--magnetic) {
+  --mx: 0;
+  --my: 0;
+}
+
+.btn:active {
+  --press: 0.97;
+  transition-duration: var(--dur-1);
+}
+
+.btn__label {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Diagonal sheen that sweeps across on hover — the "premium" tell, kept to a
+   single pass so it reads as light rather than as an animation. */
+.btn__sheen {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.28) 48%,
+    transparent 64%
+  );
+  transform: translateX(-120%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn:hover .btn__sheen {
+  opacity: calc(1 * var(--motion));
+  transform: translateX(120%);
+  transition:
+    transform 780ms var(--ease-out),
+    opacity var(--dur-2) linear;
+}
+
+/* --- Sizes --------------------------------------------------------------- */
+.btn--sm {
+  padding: 9px 15px;
+  font-size: var(--text-xs);
+}
+.btn--md {
+  padding: 12px 19px;
+}
+.btn--lg {
+  padding: 15px 24px;
+  font-size: var(--text-base);
+}
+
+/* --- Variants ------------------------------------------------------------ */
+
+.btn--primary {
+  background: var(--ink);
+  color: var(--bg);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn--primary:hover {
+  box-shadow: var(--shadow-glow-blue);
+  transform: translate3d(var(--mx, 0), calc(var(--my, 0px) - 2px), 0) scale(var(--press, 1));
+}
+
+.btn--secondary {
+  background: var(--surface-glass);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  box-shadow: var(--ring-top);
+}
+
+.btn--secondary:hover {
+  border-color: var(--mint-a40);
+  background: var(--surface-2);
+  box-shadow: var(--ring-top), var(--shadow-md);
+  transform: translate3d(var(--mx, 0), calc(var(--my, 0px) - 2px), 0) scale(var(--press, 1));
+}
+
+.btn--ghost {
+  color: var(--muted);
+  padding-inline: var(--space-3);
+}
+
+.btn--ghost:hover {
+  color: var(--ink);
+  background: var(--surface-raised);
+}
+
+.btn[disabled],
+.btn[aria-disabled='true'] {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* --- Icons --------------------------------------------------------------- */
+
+.icon-arrow,
+.icon-check {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}
+
+.btn .icon-arrow {
+  transition: transform var(--dur-3) var(--ease-spring);
+}
+
+.btn:hover .icon-arrow {
+  transform: translateX(3px);
+}
+
+/* --- Quiet link ---------------------------------------------------------- */
+
+.quiet-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--muted);
+  transition: color var(--dur-3) var(--ease-out);
+}
+
+.quiet-link__text {
+  position: relative;
+  padding-bottom: 3px;
+}
+
+/* Underline grows from the left on hover rather than fading — reads as a
+   deliberate gesture instead of a state change. */
+.quiet-link__text::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.35;
+  transform-origin: left;
+  transform: scaleX(1);
+  transition:
+    transform var(--dur-4) var(--ease-out),
+    opacity var(--dur-3) var(--ease-out);
+}
+
+.quiet-link:hover {
+  color: var(--mint);
+}
+
+.quiet-link:hover .quiet-link__text::after {
+  opacity: 1;
+}
+
+.quiet-link .icon-arrow {
+  transition: transform var(--dur-3) var(--ease-spring);
+}
+
+.quiet-link:hover .icon-arrow {
+  transform: translateX(4px);
+}

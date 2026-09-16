@@ -1,0 +1,151 @@
+/* ============================= 05 Founders =============================== */
+
+.founders {
+  border-top: 1px solid var(--line);
+}
+
+.founders__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  margin-top: clamp(48px, 7vw, 88px);
+}
+
+.founder {
+  height: 100%;
+}
+
+.founder .surface-card__body {
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.founder__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: var(--space-4);
+}
+
+/* Monogram in place of a headshot. Uses the brand gradient so it reads as a
+   deliberate mark rather than as a missing image. */
+.founder__avatar {
+  width: 62px;
+  height: 62px;
+  flex: none;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--grad-brand);
+  color: #04121a;
+  font-size: var(--text-xl);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  box-shadow: var(--shadow-glow-mint);
+  transition: transform var(--dur-5) var(--ease-spring);
+}
+
+.founder:hover .founder__avatar {
+  transform: scale(1.06) rotate(-4deg);
+}
+
+.founder__discipline {
+  color: var(--mint);
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  padding: 6px 12px;
+  background: var(--surface-raised);
+}
+
+.founder__name {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  letter-spacing: var(--tracking-heading);
+  line-height: 1.15;
+  margin-top: var(--space-7);
+}
+
+.founder__credential {
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.founder__role {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--muted-2);
+  margin-top: var(--space-3);
+}
+
+/* No max-width: the card's own padding sets the measure, which lands around
+   50 characters per line here — inside the comfortable range, and it fills the
+   card instead of stranding half of it empty. */
+.founder__bio {
+  color: var(--muted);
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+  margin-top: var(--space-5);
+}
+
+.founder__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--space-6);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--muted);
+  transition: color var(--dur-3) var(--ease-out);
+}
+
+.founder__link svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform var(--dur-3) var(--ease-spring);
+}
+
+.founder__link:hover {
+  color: var(--mint);
+}
+
+.founder__link:hover svg {
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 760px) {
+  .founders__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .founder .surface-card__body {
+    padding: var(--space-7) var(--space-6) var(--space-6);
+  }
+
+  .founder__avatar {
+    width: 54px;
+    height: 54px;
+    font-size: var(--text-lg);
+  }
+
+  .founder__name {
+    margin-top: var(--space-6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .founder:hover .founder__avatar {
+    transform: none;
+  }
+}

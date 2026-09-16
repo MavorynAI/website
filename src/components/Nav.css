@@ -1,0 +1,383 @@
+/* ============================== Navigation =============================== */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  height: var(--nav-h, 88px);
+  display: flex;
+  align-items: center;
+  /* Transparent at rest; the glass materialises once the page scrolls. */
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    height var(--dur-5) var(--ease-out),
+    background var(--dur-4) var(--ease-out),
+    border-color var(--dur-4) var(--ease-out),
+    backdrop-filter var(--dur-4) var(--ease-out),
+    box-shadow var(--dur-4) var(--ease-out);
+}
+
+.nav--scrolled {
+  background: var(--surface-glass);
+  border-bottom-color: var(--line);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 1px 0 var(--line-faint), var(--shadow-sm);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  width: min(var(--container), 100% - (var(--gutter) * 2));
+}
+
+.nav__brand {
+  border-radius: var(--r-sm);
+}
+
+/* --- Links + sliding indicator ------------------------------------------ */
+
+.nav__list {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__list a {
+  position: relative;
+  z-index: 2;
+  display: block;
+  padding: 9px 14px;
+  border-radius: var(--r-full);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--muted);
+  transition: color var(--dur-3) var(--ease-out);
+}
+
+.nav__list a:hover {
+  color: var(--ink);
+}
+
+.nav__list a.is-active {
+  color: var(--ink);
+}
+
+/* The pill glides between links instead of each link owning a background —
+   one moving element reads as a single, continuous gesture. */
+.nav__indicator {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--indicator-w, 0);
+  border-radius: var(--r-full);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  opacity: var(--indicator-opacity, 0);
+  transform: translate3d(var(--indicator-x, 0), 0, 0);
+  transition:
+    transform var(--dur-5) var(--ease-spring),
+    width var(--dur-5) var(--ease-spring),
+    opacity var(--dur-3) var(--ease-out);
+  pointer-events: none;
+}
+
+.nav__end {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* Reading progress. `animation-timeline: scroll()` runs entirely off the main
+   thread where supported; browsers without it simply show no bar. */
+.nav__progress {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: 100%;
+  transform-origin: left;
+  transform: scaleX(0);
+  background: var(--grad-brand);
+  opacity: 0;
+  transition: opacity var(--dur-4) var(--ease-out);
+  pointer-events: none;
+}
+
+.nav--scrolled .nav__progress {
+  opacity: 1;
+}
+
+@supports (animation-timeline: scroll()) {
+  .nav__progress {
+    animation: nav-progress linear;
+    animation-timeline: scroll(root block);
+  }
+}
+
+@keyframes nav-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* --- Theme toggle -------------------------------------------------------- */
+
+/* The visible track is 52x30, but the hit area is padded out to the 44px
+   minimum so it is comfortable to tap. */
+.theme-toggle {
+  flex: none;
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 7px 0;
+  border-radius: var(--r-full);
+}
+
+.theme-toggle__track {
+  display: block;
+  position: relative;
+  width: 52px;
+  height: 30px;
+  border-radius: var(--r-full);
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  transition:
+    background var(--dur-4) var(--ease-out),
+    border-color var(--dur-3) var(--ease-out);
+}
+
+.theme-toggle:hover .theme-toggle__track {
+  border-color: var(--mint-a40);
+}
+
+.theme-toggle__knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: var(--bg);
+  box-shadow: var(--shadow-xs);
+  transform: translateX(0);
+  transition: transform var(--dur-5) var(--ease-spring);
+}
+
+[data-theme='light'] .theme-toggle__knob {
+  transform: translateX(22px);
+}
+
+.theme-toggle__knob svg {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  transition:
+    opacity var(--dur-3) var(--ease-out),
+    transform var(--dur-4) var(--ease-out);
+}
+
+.theme-toggle__sun {
+  opacity: 0;
+  transform: rotate(-70deg) scale(0.5);
+}
+
+.theme-toggle__moon {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+[data-theme='light'] .theme-toggle__sun {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+[data-theme='light'] .theme-toggle__moon {
+  opacity: 0;
+  transform: rotate(70deg) scale(0.5);
+}
+
+/* --- Burger -------------------------------------------------------------- */
+
+.nav__burger {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  position: relative;
+  transition:
+    border-color var(--dur-3) var(--ease-out),
+    background var(--dur-3) var(--ease-out);
+}
+
+.nav__burger:hover {
+  border-color: var(--line-strong);
+}
+
+.nav__burger span {
+  position: absolute;
+  left: 13px;
+  width: 18px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: var(--ink);
+  transition: transform var(--dur-4) var(--ease-spring);
+}
+
+.nav__burger span:first-child {
+  top: 18px;
+}
+.nav__burger span:last-child {
+  top: 24px;
+}
+
+.nav__burger.is-open span:first-child {
+  transform: translateY(3px) rotate(45deg);
+}
+.nav__burger.is-open span:last-child {
+  transform: translateY(-3px) rotate(-45deg);
+}
+
+/* --- Mobile sheet -------------------------------------------------------- */
+
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+}
+
+.sheet__scrim {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  border: 0;
+  background: rgba(3, 6, 14, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  animation: sheet-scrim var(--dur-4) var(--ease-out) forwards;
+}
+
+.sheet__panel {
+  position: absolute;
+  /* Sits just under the bar, whichever height the bar currently has. */
+  inset: calc(var(--nav-h, 88px) + var(--space-2)) var(--gutter) auto var(--gutter);
+  max-height: calc(100dvh - var(--nav-h, 88px) - var(--space-8));
+  overflow-y: auto;
+  padding: var(--space-6);
+  border-radius: var(--r-xl);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-xl), var(--ring-top);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  transform-origin: top center;
+  animation: sheet-in var(--dur-5) var(--ease-emphasis) forwards;
+}
+
+.sheet__panel nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sheet__panel nav a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-2);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: var(--tracking-tight);
+  border-bottom: 1px solid var(--line-faint);
+  color: var(--ink);
+  /* Each row arrives a beat after the one above it. */
+  opacity: 0;
+  animation: sheet-row var(--dur-5) var(--ease-out) forwards;
+  animation-delay: calc(80ms + var(--i) * 45ms);
+}
+
+.sheet__panel nav a .icon-arrow {
+  color: var(--mint);
+  transition: transform var(--dur-3) var(--ease-spring);
+}
+
+.sheet__panel nav a:active .icon-arrow {
+  transform: translateX(4px);
+}
+
+@keyframes sheet-scrim {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes sheet-row {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --- Responsive ---------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .nav__links,
+  .nav__cta {
+    display: none;
+  }
+
+  .nav__burger {
+    display: block;
+  }
+}
+
+@media (min-width: 901px) {
+  .sheet {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet__scrim,
+  .sheet__panel,
+  .sheet__panel nav a {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

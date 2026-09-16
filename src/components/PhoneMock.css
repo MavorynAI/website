@@ -1,0 +1,306 @@
+/* ============================== Device mock ==============================
+   Every colour here comes from a --device-* token, so the mockup renders the
+   app in dark mode when the site is dark and in light mode when it is light.
+   ======================================================================== */
+
+.phone {
+  position: relative;
+  z-index: var(--z-raised);
+  width: 300px;
+  height: 612px;
+  border-radius: var(--r-3xl);
+  padding: 7px;
+  background: var(--device-bezel);
+  box-shadow:
+    var(--shadow-xl),
+    0 0 0 1px rgba(255, 255, 255, 0.09),
+    inset 0 1px 1px rgba(255, 255, 255, 0.18);
+  transition: background var(--dur-5) var(--ease-out);
+}
+
+.phone__screen {
+  position: relative;
+  height: 100%;
+  border-radius: calc(var(--r-3xl) - 6px);
+  background: var(--device-bg);
+  color: var(--device-ink);
+  padding: 16px 18px;
+  overflow: hidden;
+  transition:
+    background var(--dur-5) var(--ease-out),
+    color var(--dur-5) var(--ease-out);
+}
+
+/* Dynamic-island style cutout. */
+.phone__screen::before {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 74px;
+  height: 21px;
+  border-radius: var(--r-full);
+  background: var(--device-island);
+  z-index: 4;
+}
+
+.phone__status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  padding: 2px 7px 12px;
+}
+
+.phone__battery {
+  width: 17px;
+  height: 8px;
+  border: 1px solid var(--device-line-strong);
+  border-radius: 2px;
+  position: relative;
+}
+
+.phone__battery::after {
+  content: '';
+  position: absolute;
+  inset: 1.5px;
+  right: 40%;
+  background: var(--device-line-strong);
+  border-radius: 1px;
+}
+
+.phone__appbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-1);
+}
+
+.phone__appbar .logo__word {
+  display: none;
+}
+
+.phone__appbar .logo__mark {
+  width: 28px;
+  height: 28px;
+}
+
+.phone__more {
+  color: var(--device-ink-soft);
+  letter-spacing: 1px;
+  font-size: 12px;
+  cursor: default;
+}
+
+.phone__hello {
+  margin-top: var(--space-6);
+}
+
+.phone__hello span {
+  font-size: var(--text-xs);
+  color: var(--device-ink-soft);
+}
+
+.phone__hello h3 {
+  font-size: 25px;
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-heading);
+  margin-top: 5px;
+}
+
+/* --- Score card ---------------------------------------------------------- */
+
+.score-card {
+  height: 146px;
+  margin-top: var(--space-5);
+  border-radius: var(--r-xl);
+  padding: 19px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--device-panel-ink);
+  background: var(--device-panel);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Slow sheen drifting over the card — the one ambient loop inside the device. */
+.score-card::after {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0 65%,
+    rgba(53, 212, 220, 0.14) 80%,
+    transparent 92%
+  );
+  animation: score-sweep 9s linear infinite;
+  opacity: calc(1 * var(--motion));
+}
+
+.score-card__meta {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+.score-card__meta span {
+  font-size: var(--text-xs);
+  color: var(--device-panel-soft);
+}
+
+.score-card__meta strong {
+  font-size: 46px;
+  line-height: 1.12;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+.score-card__meta small {
+  font-size: var(--text-xs);
+  color: var(--device-panel-accent);
+}
+
+.score-ring {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+}
+
+.score-ring svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* Start the arc at 12 o'clock. */
+  transform: rotate(-90deg);
+}
+
+.score-ring circle {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.score-ring__track {
+  stroke: rgba(196, 211, 245, 0.18);
+}
+
+.score-ring__value {
+  stroke: url(#ring-gradient);
+  transition: stroke-dashoffset 1700ms var(--ease-emphasis);
+}
+
+.score-ring b {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* --- Trend + chart ------------------------------------------------------- */
+
+.phone__trend {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-6);
+  font-size: var(--text-xs);
+  font-weight: 500;
+}
+
+.phone__trend b {
+  color: var(--device-positive);
+}
+
+.phone__chart {
+  height: 78px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 5px;
+  margin-top: var(--space-3);
+  border-bottom: 1px solid var(--device-line);
+}
+
+.phone__bar {
+  position: relative;
+  width: 22px;
+  border-radius: 5px 5px 0 0;
+  background: var(--device-bar);
+  /* Grow from the baseline, staggered left to right. */
+  height: 0;
+  transition:
+    height 900ms var(--ease-emphasis),
+    background var(--dur-5) var(--ease-out);
+  transition-delay: calc(var(--i) * 70ms), 0ms;
+}
+
+.phone__chart.is-live .phone__bar {
+  height: var(--h);
+}
+
+.phone__bar i {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--device-bar-ink);
+}
+
+.phone__bar.is-today {
+  background: var(--device-bar-peak);
+}
+
+.phone__bar.is-today i {
+  color: #fff;
+}
+
+.phone__cta {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  right: 18px;
+  border-radius: var(--r-md);
+  background: var(--device-selected-bg);
+  border: 1px solid var(--device-selected-line);
+  color: var(--device-selected-ink);
+  padding: 14px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: default;
+  box-shadow: 0 8px 20px rgba(10, 20, 40, 0.28);
+}
+
+.phone__cta span {
+  color: var(--device-panel-accent);
+}
+
+@keyframes score-sweep {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .score-card::after {
+    animation: none;
+  }
+  .phone__bar {
+    height: var(--h);
+    transition: none;
+  }
+}

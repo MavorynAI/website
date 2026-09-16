@@ -1,0 +1,323 @@
+/* ============================================================================
+   MavorynAI — Design Tokens
+   The single source of truth for colour, type, space, radius, elevation and
+   motion. Nothing in the app should hard-code a value that lives here.
+   ========================================================================= */
+
+:root {
+  /* --- Brand ------------------------------------------------------------ */
+  /* Core brand hues are identical across themes in spirit; only the exact
+     tints shift so contrast stays AA+ on each background. */
+  --brand-mint: #35d4dc;
+  --brand-blue: #5b82ff;
+  --brand-ink: #070a12;
+
+  /* --- Semantic colour: dark theme (default) ---------------------------- */
+  --bg: #070a12;
+  --bg-deep: #05070d;
+  --surface: #0d1422;
+  --surface-2: #121b2c;
+  --surface-3: #18233a;
+  --surface-raised: rgba(255, 255, 255, 0.035);
+  --surface-glass: rgba(13, 20, 34, 0.72);
+
+  --ink: #f7f9ff;
+  --ink-soft: #d6def0;
+  --muted: #b7c1d6;
+  --muted-2: #8c98b1;
+
+  --line: rgba(196, 211, 245, 0.16);
+  --line-strong: rgba(196, 211, 245, 0.28);
+  --line-faint: rgba(196, 211, 245, 0.08);
+
+  --mint: #35d4dc;
+  --teal: #35d4dc;
+  --blue: #5b82ff;
+  --warm: #eaf3ff;
+  --danger: #ff7d86;
+  --warning: #f0bd62;
+  --success: #35d4dc;
+
+  /* Alpha ramps used for glows, washes and hover films */
+  --mint-a08: rgba(53, 212, 220, 0.08);
+  --mint-a14: rgba(53, 212, 220, 0.14);
+  --mint-a24: rgba(53, 212, 220, 0.24);
+  --mint-a40: rgba(53, 212, 220, 0.4);
+  --blue-a08: rgba(91, 130, 255, 0.08);
+  --blue-a14: rgba(91, 130, 255, 0.14);
+  --blue-a24: rgba(91, 130, 255, 0.24);
+  --blue-a40: rgba(91, 130, 255, 0.4);
+
+  /* Signature gradient — used sparingly, on one element per viewport */
+  --grad-brand: linear-gradient(120deg, var(--mint) 0%, var(--blue) 100%);
+  --grad-brand-soft: linear-gradient(120deg, var(--mint-a24), var(--blue-a24));
+  --grad-text: linear-gradient(120deg, var(--ink) 30%, var(--mint) 120%);
+
+  /* --- Device / product-mockup palette (dark theme) ----------------------
+     The phone and the step visuals depict the MavorynAI app, so they follow
+     the site's theme: the app is shown in dark mode when the site is dark and
+     in light mode when the site is light. Every colour inside a mockup comes
+     from this block — no mockup rule hard-codes a hex. */
+  --device-bg: #0e1524;
+  --device-surface: #16203444;
+  --device-surface-solid: #162034;
+  --device-ink: #eef3ff;
+  --device-ink-soft: #93a1bd;
+  --device-line: rgba(196, 211, 245, 0.14);
+  --device-line-strong: rgba(196, 211, 245, 0.28);
+  --device-bezel: linear-gradient(160deg, #303e5c, #141b2b 55%);
+  --device-island: #05080f;
+
+  /* The score panel is the one saturated surface inside the app UI. */
+  --device-panel: radial-gradient(120% 130% at 100% 0%, rgba(53, 212, 220, 0.2), transparent 60%),
+    linear-gradient(150deg, #1b2c49, #121d33);
+  --device-panel-ink: #eef8f4;
+  --device-panel-soft: #9fb4cc;
+  /* The score panel and the primary app button stay dark in both themes, so
+     text on them always uses the bright accent, never the light-theme one. */
+  --device-panel-accent: #35d4dc;
+
+  --device-chip: rgba(91, 130, 255, 0.18);
+  --device-chip-ink: #9fb8ff;
+  --device-accent: #35d4dc;
+  --device-accent-strong: #5b82ff;
+  --device-positive: #35d4dc;
+
+  --device-track: rgba(196, 211, 245, 0.13);
+  --device-bar: #1d3550;
+  --device-bar-ink: #a9bcd6;
+  --device-bar-peak: linear-gradient(180deg, #5b82ff, #3f6ae8);
+
+  --device-selected-bg: #1e3a72;
+  --device-selected-line: #2f5091;
+  --device-selected-ink: #ffffff;
+
+  --device-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+
+  /* Stage behind a step visual. */
+  --stage: radial-gradient(circle at 50% 45%, var(--mint-a24), transparent 66%),
+    linear-gradient(160deg, #0b1220, #070b14);
+  --stage-alt: radial-gradient(circle at 50% 45%, var(--blue-a24), transparent 66%),
+    linear-gradient(160deg, #0b1220, #070b14);
+
+  /* Signal-map nodes float directly on the stage, not on an app surface. */
+  --signal-node-bg: rgba(16, 26, 43, 0.92);
+  --signal-node-ink: #c0c9dc;
+
+  /* --- Type scale ------------------------------------------------------- */
+  --font-sans: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-base: 13px;
+  --text-md: 15px;
+  --text-lg: 17px;
+  --text-xl: 21px;
+  --text-2xl: 26px;
+  --text-3xl: clamp(28px, 3vw, 34px);
+  --text-4xl: clamp(34px, 4vw, 44px);
+  --display-sm: clamp(38px, 4.6vw, 56px);
+  --display: clamp(44px, 5.6vw, 76px);
+  --display-lg: clamp(58px, 7.2vw, 101px);
+
+  /* Display leading. Anything under ~1.0 makes the line box shorter than the
+     glyphs, so a descender on one line lands within a couple of pixels of the
+     caps on the next. 1.04 still reads tight at display sizes but leaves the
+     descenders room to breathe. */
+  --leading-tight: 1.04;
+  --leading-snug: 1.06;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+  --leading-loose: 1.85;
+
+  --tracking-display: -0.075em;
+  --tracking-heading: -0.055em;
+  --tracking-tight: -0.02em;
+  --tracking-wide: 0.1em;
+  --tracking-wider: 0.16em;
+
+  /* --- Space scale (4px base) ------------------------------------------ */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 48px;
+  --space-10: 56px;
+  --space-11: 64px;
+  --space-12: 80px;
+  --space-13: 96px;
+  --space-14: 120px;
+  --space-15: 160px;
+
+  /* Current height of the sticky bar. Declared here so the value exists before
+     hydration; Nav overwrites it on the root when the bar condenses. */
+  --nav-h: 88px;
+
+  --section-y: clamp(96px, 11vw, 168px);
+  --gutter: clamp(20px, 4vw, 32px);
+  --container: 1180px;
+  --container-wide: 1320px;
+
+  /* --- Radius ----------------------------------------------------------- */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-2xl: 36px;
+  --r-3xl: 46px;
+  --r-full: 999px;
+
+  /* --- Elevation -------------------------------------------------------- */
+  --shadow-xs: 0 1px 2px rgba(3, 6, 14, 0.4);
+  --shadow-sm: 0 2px 8px rgba(3, 6, 14, 0.35);
+  --shadow-md: 0 8px 24px rgba(3, 6, 14, 0.35);
+  --shadow-lg: 0 20px 48px rgba(3, 6, 14, 0.4);
+  --shadow-xl: 0 40px 100px rgba(0, 0, 0, 0.45);
+  --shadow-glow-mint: 0 18px 46px rgba(53, 212, 220, 0.22);
+  --shadow-glow-blue: 0 18px 46px rgba(91, 130, 255, 0.24);
+  --shadow: var(--shadow-xl);
+
+  /* Inner hairline that gives glass surfaces a lit top edge */
+  --ring-top: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
+  /* --- Motion ----------------------------------------------------------- */
+  /* Durations: keep interaction feedback under 240ms, entrances under 900ms */
+  --dur-1: 120ms;
+  --dur-2: 180ms;
+  --dur-3: 240ms;
+  --dur-4: 360ms;
+  --dur-5: 520ms;
+  --dur-6: 720ms;
+  --dur-7: 900ms;
+
+  /* Easing: `out` for things arriving, `in-out` for things moving in place,
+     `spring` for anything the pointer touches, `emphasis` for hero moments. */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-emphasis: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-linear: linear;
+
+  /* Multiplier flipped to 0 under prefers-reduced-motion so decorative
+     ambient loops can opt out arithmetically rather than with !important. */
+  --motion: 1;
+
+  /* --- Layering --------------------------------------------------------- */
+  --z-base: 1;
+  --z-raised: 5;
+  --z-sticky: 40;
+  --z-nav: 60;
+  --z-overlay: 80;
+  --z-toast: 100;
+}
+
+/* ============================== Light theme ============================== */
+:root[data-theme='light'] {
+  --bg: #f5f7fc;
+  --bg-deep: #eef2f9;
+  --surface: #ffffff;
+  --surface-2: #eaf0fa;
+  --surface-3: #dfe7f5;
+  --surface-raised: rgba(11, 19, 40, 0.025);
+  --surface-glass: rgba(255, 255, 255, 0.76);
+
+  --ink: #0b1328;
+  --ink-soft: #1d2942;
+  --muted: #4e5a72;
+  --muted-2: #58647b;
+
+  --line: rgba(20, 40, 82, 0.14);
+  --line-strong: rgba(20, 40, 82, 0.24);
+  --line-faint: rgba(20, 40, 82, 0.07);
+
+  --mint: #06707f;
+  --teal: #06707f;
+  --blue: #285bd4;
+  --warm: #173b72;
+
+  --mint-a08: rgba(8, 127, 145, 0.07);
+  --mint-a14: rgba(8, 127, 145, 0.12);
+  --mint-a24: rgba(8, 127, 145, 0.2);
+  --mint-a40: rgba(8, 127, 145, 0.32);
+  --blue-a08: rgba(40, 91, 212, 0.07);
+  --blue-a14: rgba(40, 91, 212, 0.12);
+  --blue-a24: rgba(40, 91, 212, 0.2);
+  --blue-a40: rgba(40, 91, 212, 0.32);
+
+  --grad-text: linear-gradient(120deg, var(--ink) 30%, var(--mint) 120%);
+
+  /* --- Device / product mockup (light theme) ----------------------------
+     The app UI switches to its light appearance alongside the site. Surfaces
+     go white so they still separate from the tinted stage behind them. */
+  --device-bg: #ffffff;
+  --device-surface: #ffffff;
+  --device-surface-solid: #f4f7fc;
+  --device-ink: #101c31;
+  --device-ink-soft: #5c6880;
+  --device-line: #dde4ef;
+  --device-line-strong: #c3cddd;
+  --device-bezel: linear-gradient(160deg, #3d4a68, #1b2333 60%);
+  --device-island: #151d2d;
+
+  --device-panel: radial-gradient(120% 130% at 100% 0%, rgba(53, 212, 220, 0.24), transparent 60%),
+    linear-gradient(150deg, #16243c, #101a2d);
+  --device-panel-ink: #eef8f4;
+  --device-panel-soft: #a5bdb4;
+  --device-panel-accent: #35d4dc;
+
+  --device-chip: #dce9ff;
+  --device-chip-ink: #1f4ebb;
+  --device-accent: #0a7a8a;
+  --device-accent-strong: #285bd4;
+  --device-positive: #0b7a59;
+
+  --device-track: #dfe5f0;
+  --device-bar: #cbe8f0;
+  --device-bar-ink: #2b4257;
+  --device-bar-peak: linear-gradient(180deg, #5b82ff, #3f6ae8);
+
+  --device-selected-bg: #17305e;
+  --device-selected-line: #17305e;
+  --device-selected-ink: #ffffff;
+
+  --device-shadow: 0 30px 64px rgba(28, 50, 92, 0.2);
+
+  --stage: radial-gradient(circle at 50% 42%, rgba(8, 127, 145, 0.16), transparent 64%),
+    linear-gradient(160deg, #e6edf8, #d6e1f1);
+  --stage-alt: radial-gradient(circle at 50% 42%, rgba(40, 91, 212, 0.16), transparent 64%),
+    linear-gradient(160deg, #e8edf8, #d9e2f2);
+
+  --signal-node-bg: rgba(255, 255, 255, 0.92);
+  --signal-node-ink: #33415c;
+
+  --shadow-xs: 0 1px 2px rgba(35, 60, 110, 0.06);
+  --shadow-sm: 0 2px 10px rgba(35, 60, 110, 0.07);
+  --shadow-md: 0 10px 28px rgba(35, 60, 110, 0.09);
+  --shadow-lg: 0 22px 54px rgba(35, 60, 110, 0.12);
+  --shadow-xl: 0 35px 80px rgba(35, 60, 110, 0.14);
+  --shadow-glow-mint: 0 18px 46px rgba(8, 127, 145, 0.18);
+  --shadow-glow-blue: 0 18px 46px rgba(40, 91, 212, 0.2);
+  --shadow: var(--shadow-xl);
+
+  --ring-top: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* ========================= Reduced-motion contract ======================= */
+/* Decorative, infinite and transform-heavy motion is switched off. Opacity
+   crossfades and colour transitions are kept: they aid comprehension and do
+   not trigger vestibular discomfort. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion: 0;
+    --dur-4: 1ms;
+    --dur-5: 1ms;
+    --dur-6: 1ms;
+    --dur-7: 1ms;
+  }
+}

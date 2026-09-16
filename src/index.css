@@ -1,2 +1,26 @@
+/* Fonts first so the cascade can rely on them, then tokens, then base.
+   Component styles are imported by the components themselves. */
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
-:root{font-family:'Manrope',system-ui,sans-serif;color:#f7f9ff;background:#070a12;font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:320px;line-height:1.5}button,a,input{font:inherit}a{color:inherit;text-decoration:none}button,a,input{outline-offset:4px}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #35d4dc;box-shadow:0 0 0 6px rgba(53,212,220,.2)}::selection{background:#285bd4;color:#fff}
+@import './styles/tokens.css';
+@import './styles/base.css';
+
+/* Keyboard-only skip link — first thing in the tab order, visible once focused. */
+.skip-link {
+  position: fixed;
+  top: var(--space-4);
+  left: 50%;
+  z-index: var(--z-toast);
+  translate: -50% -200%;
+  padding: 12px 20px;
+  border-radius: var(--r-full);
+  background: var(--ink);
+  color: var(--bg);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  box-shadow: var(--shadow-lg);
+  transition: translate var(--dur-4) var(--ease-spring);
+}
+
+.skip-link:focus-visible {
+  translate: -50% 0;
+}

@@ -1,0 +1,111 @@
+/* ============================== 04 Mission =============================== */
+
+.mission {
+  text-align: center;
+}
+
+.mission__tag {
+  justify-content: center;
+}
+
+.mission__copy {
+  max-width: 900px;
+  margin: clamp(48px, 6vw, 80px) auto clamp(56px, 7vw, 96px);
+}
+
+.mission__eyebrow {
+  display: block;
+  color: var(--muted-2);
+  letter-spacing: var(--tracking-wider);
+}
+
+.mission__title {
+  margin: var(--space-6) 0;
+}
+
+.mission__lede {
+  max-width: 62ch;
+  margin-inline: auto;
+}
+
+/* --- Arizona panel ------------------------------------------------------- */
+
+.arizona {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 4vw, 44px);
+  text-align: left;
+  padding: var(--space-8);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  background:
+    radial-gradient(120% 160% at 0% 0%, var(--mint-a08), transparent 55%),
+    var(--surface-raised);
+  box-shadow: var(--ring-top);
+}
+
+.arizona__mark {
+  font-size: 46px;
+  font-weight: 600;
+  letter-spacing: -0.07em;
+  line-height: 1;
+  flex: none;
+  background: var(--grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.arizona__text span {
+  display: block;
+  color: var(--muted-2);
+}
+
+.arizona__text strong {
+  display: block;
+  font-size: var(--text-lg);
+  letter-spacing: var(--tracking-tight);
+  margin: var(--space-2) 0 var(--space-4);
+}
+
+.arizona__roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.arizona__roles li {
+  font-size: var(--text-xs);
+  color: var(--muted);
+  padding: 5px 11px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  transition:
+    color var(--dur-3) var(--ease-out),
+    border-color var(--dur-3) var(--ease-out),
+    transform var(--dur-3) var(--ease-spring);
+}
+
+.arizona__roles li:hover {
+  color: var(--mint);
+  border-color: var(--mint-a40);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 700px) {
+  .arizona {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+    padding: var(--space-7);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arizona__roles li:hover {
+    transform: none;
+  }
+}

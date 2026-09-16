@@ -1,0 +1,36 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: -0.06em;
+}
+
+.logo__mark {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  transition: transform var(--dur-4) var(--ease-spring);
+}
+
+.logo__word {
+  transition: opacity var(--dur-3) var(--ease-out);
+}
+
+.logo__a {
+  color: var(--blue);
+}
+
+.logo__i {
+  color: var(--mint);
+}
+
+.logo--compact .logo__mark {
+  width: 34px;
+  height: 34px;
+}
+
+a:hover .logo__mark {
+  transform: rotate(-6deg) scale(1.06);
+}
