@@ -30,7 +30,7 @@ const FOUNDERS: Founder[] = [
     initials: 'AS',
     name: 'Ananth Sundararajan Sekar',
     role: 'Founder, Technology',
-    credential: 'M.S.',
+    credential: '',
     discipline: 'Technology',
     bio: 'Pursuing an MS in Computer Science at ASU, he leads everything technical, builds every part of MavorynAI you touch, and sweats the details most people will never notice.',
   },
