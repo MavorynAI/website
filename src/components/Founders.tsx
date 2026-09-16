@@ -20,17 +20,17 @@ type Founder = {
 const FOUNDERS: Founder[] = [
   {
     initials: 'SR',
-    name: 'Santhoshkumar Rajeshkannan',
-    role: 'Co-founder, Healthcare',
-    credential: 'D.Pharm',
+    name: 'Dr. Santhoshkumar Rajeshkannan',
+    role: 'Founder, Healthcare',
+    credential: 'PharmD',
     discipline: 'Healthcare',
     bio: 'A pharmacy professional who has worked the hours this product measures. Now pursuing an MS in Bioinformatics and Data Science at ASU, he leads everything clinical, and makes sure the science earns your trust.',
   },
   {
     initials: 'AS',
     name: 'Ananth Sundararajan Sekar',
-    role: 'Co-founder, Technology',
-    credential: '',
+    role: 'Founder, Technology',
+    credential: 'M.S.',
     discipline: 'Technology',
     bio: 'Pursuing an MS in Computer Science at ASU, he leads everything technical, builds every part of MavorynAI you touch, and sweats the details most people will never notice.',
   },
